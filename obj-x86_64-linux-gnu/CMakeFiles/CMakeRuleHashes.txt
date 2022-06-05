@@ -1,0 +1,6 @@
+# Hashes of file build rules.
+20c554b98a5376c2f3be9750bb170911 src/server/cpp_interface.generated
+e692e4ab9397bb80b96e6d4416b6fc5f src/server/cpp_interface_internal.generated
+a47749ca7c08acd9628c0eba0b9bffee src/server/cpp_module.generated
+75cb4cb7333a5f908ee098f0c339c620 src/server/cpp_server_internal.generated
+52126d3478330244a2368ded9508d9d0 src/server/ripplegreeting.kmd.json

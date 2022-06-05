@@ -1,0 +1,12 @@
+/usr/lib/x86_64-linux-gnu/libkmsripplegreetinginterface.a
+/usr/include/kurento/modules/ripplegreeting/RippleGreeting.hpp
+/usr/lib/x86_64-linux-gnu/pkgconfig/kmsripplegreeting.pc
+/usr/lib/x86_64-linux-gnu/libkmsripplegreetingimpl.so.0.0.1~0.g050b891
+/usr/lib/x86_64-linux-gnu/libkmsripplegreetingimpl.so.0
+/usr/lib/x86_64-linux-gnu/libkmsripplegreetingimpl.so
+/usr/include/kurento/modules/ripplegreeting/RippleGreetingImpl.hpp
+/usr/include/kurento/modules/ripplegreeting/RippleGreetingOpenCVImpl.hpp
+/usr/include/kurento/modules/ripplegreeting/RippleGreetingImplFactory.hpp
+/usr/lib/x86_64-linux-gnu/kurento/modules/libkmsripplegreetingmodule.so
+/usr/share/cmake-3.10/Modules/FindKMSRIPPLEGREETING.cmake
+/usr/share/kurento/modules/ripplegreeting.kmd.json

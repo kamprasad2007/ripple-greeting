@@ -1,0 +1,2 @@
+/usr/bin/ar qc libkmsripplegreetinginterface.a  CMakeFiles/kmsripplegreetinginterface.dir/interface/generated-cpp/RippleGreetingInternal.cpp.o CMakeFiles/kmsripplegreetinginterface.dir/interface/generated-cpp/RippleGreeting.cpp.o
+/usr/bin/ranlib libkmsripplegreetinginterface.a

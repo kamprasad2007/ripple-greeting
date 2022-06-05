@@ -1,0 +1,9 @@
+1c4559007469a4e7f3590799f7607d69  usr/include/kurento/modules/ripplegreeting/RippleGreeting.hpp
+8e011af31a226ad91252f43635832da9  usr/include/kurento/modules/ripplegreeting/RippleGreetingImpl.hpp
+256926d90206e27b3bd2a21a18caace0  usr/include/kurento/modules/ripplegreeting/RippleGreetingImplFactory.hpp
+f7ecd32f68649c695e7def0d76765f97  usr/include/kurento/modules/ripplegreeting/RippleGreetingOpenCVImpl.hpp
+0946cf5f50172157281858cf61b80bfb  usr/lib/x86_64-linux-gnu/pkgconfig/kmsripplegreeting.pc
+18c78c6b44858e9a80de4658dd8d515a  usr/share/cmake-3.10/Modules/FindKMSRIPPLEGREETING.cmake
+6408fc864135c59f7085f8a6ffe58bc1  usr/share/doc/ripple-greeting-dev/changelog.gz
+d41d8cd98f00b204e9800998ecf8427e  usr/share/doc/ripple-greeting-dev/copyright
+91df10c056d6b939e044c5e3c493266a  usr/share/kurento/modules/ripplegreeting.kmd.json

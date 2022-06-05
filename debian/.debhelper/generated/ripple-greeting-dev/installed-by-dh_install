@@ -1,0 +1,8 @@
+debian/tmp/usr/include/kurento/modules/ripplegreeting/RippleGreeting.hpp
+debian/tmp/usr/include/kurento/modules/ripplegreeting/RippleGreetingImpl.hpp
+debian/tmp/usr/include/kurento/modules/ripplegreeting/RippleGreetingImplFactory.hpp
+debian/tmp/usr/include/kurento/modules/ripplegreeting/RippleGreetingOpenCVImpl.hpp
+debian/tmp/usr/lib/x86_64-linux-gnu/libkmsripplegreetingimpl.so
+debian/tmp/usr/lib/x86_64-linux-gnu/pkgconfig/kmsripplegreeting.pc
+debian/tmp/usr/share/kurento/modules/ripplegreeting.kmd.json
+debian/tmp/usr/share/cmake-3.10/Modules/FindKMSRIPPLEGREETING.cmake

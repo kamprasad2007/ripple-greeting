@@ -1,0 +1,210 @@
+# - Try to find KMSRIPPLEGREETING library
+
+#=============================================================================
+# Copyright 2014 Kurento
+#
+#=============================================================================
+
+set(PACKAGE_VERSION "0.0.1~0.g050b891")
+set(KMSRIPPLEGREETING_VERSION ${PACKAGE_VERSION})
+
+message (STATUS "Looking for KMSRIPPLEGREETING: 0.0.1~0.g050b891")
+
+include (GenericFind)
+
+generic_find (
+  REQUIRED
+  LIBNAME KMSCORE
+  VERSION ^6.0.0
+)
+
+generic_find (
+  REQUIRED
+  LIBNAME KMSELEMENTS
+  VERSION ^6.0.0
+)
+
+generic_find (
+  REQUIRED
+  LIBNAME KMSFILTERS
+  VERSION ^6.0.0
+)
+
+set (REQUIRED_VARS
+  KMSRIPPLEGREETING_VERSION
+  KMSRIPPLEGREETING_INCLUDE_DIRS
+  KMSRIPPLEGREETING_LIBRARY
+  KMSRIPPLEGREETING_LIBRARIES
+)
+
+set (KMSRIPPLEGREETING_BINARY_DIR_PREFIX "build" CACHE PATH "Path prefix used to look for binary files")
+set (KMSRIPPLEGREETING_SOURCE_DIR_PREFIX "" CACHE PATH "Path prefix used to look for source files")
+
+set(KMSRIPPLEGREETING_INCLUDE_DIRS
+  ${KMSCORE_INCLUDE_DIRS}
+  ${KMSELEMENTS_INCLUDE_DIRS}
+  ${KMSFILTERS_INCLUDE_DIRS}
+)
+
+if (NOT "RippleGreeting.hpp RippleGreetingInternal.hpp" STREQUAL " ")
+  if (TARGET kmsripplegreetinginterface)
+    set (KMSRIPPLEGREETING_INTERFACE_INCLUDE_DIR "${KMSRIPPLEGREETING_BINARY_DIR_PREFIX}/src/server/interface/generated-cpp")
+  else ()
+    find_path(KMSRIPPLEGREETING_INTERFACE_INCLUDE_DIR
+      NAMES
+        RippleGreeting.hpp
+        RippleGreetingInternal.hpp
+      PATH_SUFFIXES
+        ${KMSRIPPLEGREETING_BINARY_DIR_PREFIX}/src/server/interface/generated-cpp
+        kurento/modules/ripplegreeting
+    )
+  endif ()
+
+  list (APPEND KMSRIPPLEGREETING_INCLUDE_DIRS ${KMSRIPPLEGREETING_INTERFACE_INCLUDE_DIR})
+  list (APPEND REQUIRED_VARS KMSRIPPLEGREETING_INTERFACE_INCLUDE_DIR)
+endif ()
+
+if (NOT "RippleGreetingImplFactory.hpp" STREQUAL "")
+  if (TARGET kmsripplegreetingimpl)
+    set (KMSRIPPLEGREETING_IMPLEMENTATION_INTERNAL_INCLUDE_DIR "${KMSRIPPLEGREETING_BINARY_DIR_PREFIX}/src/server/implementation/generated-cpp")
+  else ()
+    find_path(KMSRIPPLEGREETING_IMPLEMENTATION_INTERNAL_INCLUDE_DIR
+      NAMES
+        RippleGreetingImplFactory.hpp
+      PATH_SUFFIXES
+        ${KMSRIPPLEGREETING_BINARY_DIR_PREFIX}/src/server/implementation/generated-cpp
+        kurento/modules/ripplegreeting
+    )
+  endif ()
+
+  list (APPEND KMSRIPPLEGREETING_INCLUDE_DIRS ${KMSRIPPLEGREETING_IMPLEMENTATION_INTERNAL_INCLUDE_DIR})
+  list (APPEND REQUIRED_VARS KMSRIPPLEGREETING_IMPLEMENTATION_INTERNAL_INCLUDE_DIR)
+endif ()
+
+if (NOT "RippleGreetingImpl.hpp RippleGreetingOpenCVImpl.hpp" STREQUAL "")
+  if (TARGET kmsripplegreetingimpl)
+    set (KMSRIPPLEGREETING_IMPLEMENTATION_GENERATED_INCLUDE_DIR "${KMSRIPPLEGREETING_SOURCE_DIR_PREFIX}/src/server/implementation/objects")
+  else ()
+    find_path(KMSRIPPLEGREETING_IMPLEMENTATION_GENERATED_INCLUDE_DIR
+      NAMES
+        RippleGreetingImpl.hpp RippleGreetingOpenCVImpl.hpp
+      PATH_SUFFIXES
+        src/server/implementation/objects
+        kurento/modules/ripplegreeting
+    )
+  endif ()
+
+  list (APPEND KMSRIPPLEGREETING_INCLUDE_DIRS ${KMSRIPPLEGREETING_IMPLEMENTATION_GENERATED_INCLUDE_DIR})
+  list (APPEND REQUIRED_VARS KMSRIPPLEGREETING_IMPLEMENTATION_GENERATED_INCLUDE_DIR)
+endif()
+
+if (NOT "" STREQUAL "")
+  if (TARGET kmsripplegreetingimpl)
+    set (KMSRIPPLEGREETING_IMPLEMENTATION_EXTRA_INCLUDE_DIR "${KMSRIPPLEGREETING_SOURCE_DIR_PREFIX}/")
+  else ()
+    find_path(KMSRIPPLEGREETING_IMPLEMENTATION_EXTRA_INCLUDE_DIR
+      NAMES
+        
+      PATH_SUFFIXES
+        
+        kurento/modules/ripplegreeting
+    )
+  endif ()
+
+  list (APPEND KMSRIPPLEGREETING_INCLUDE_DIRS ${KMSRIPPLEGREETING_IMPLEMENTATION_EXTRA_INCLUDE_DIR})
+  list (APPEND REQUIRED_VARS KMSRIPPLEGREETING_IMPLEMENTATION_EXTRA_INCLUDE_DIR)
+endif ()
+
+if (NOT "" STREQUAL "")
+  if (TARGET kmsripplegreetinginterface)
+    set (KMSRIPPLEGREETING_INTERFACE_EXTRA_INCLUDE_DIR "${KMSRIPPLEGREETING_SOURCE_DIR_PREFIX}/")
+  else ()
+    find_path(KMSRIPPLEGREETING_INTERFACE_EXTRA_INCLUDE_DIR
+      NAMES
+        
+      PATH_SUFFIXES
+        
+        kurento/modules/ripplegreeting
+    )
+  endif()
+
+  list (APPEND KMSRIPPLEGREETING_INCLUDE_DIRS ${KMSRIPPLEGREETING_INTERFACE_EXTRA_INCLUDE_DIR})
+  list (APPEND REQUIRED_VARS KMSRIPPLEGREETING_INTERFACE_EXTRA_INCLUDE_DIR)
+endif ()
+
+if (TARGET kmsripplegreetingimpl)
+  set (KMSRIPPLEGREETING_LIBRARY kmsripplegreetingimpl)
+else ()
+  find_library (KMSRIPPLEGREETING_LIBRARY
+    NAMES
+      kmsripplegreetingimpl
+    PATH_SUFFIXES
+      ${KMSRIPPLEGREETING_BINARY_DIR_PREFIX}/src/server
+  )
+endif()
+
+set (REQUIRED_LIBS "")
+foreach (LIB ${REQUIRED_LIBS})
+  string(FIND ${LIB} " " POS)
+
+  if (${POS} GREATER 0)
+    string(REPLACE " " ";" REQUIRED_LIB_LIST ${LIB})
+    include (CMakeParseArguments)
+    cmake_parse_arguments("PARAM" "" "LIBNAME" "" ${REQUIRED_LIB_LIST})
+
+    if (DEFINED PARAM_LIBNAME)
+      generic_find (${REQUIRED_LIB_LIST} REQUIRED)
+      set (LIB_NAME ${PARAM_LIBNAME})
+    else()
+      string (SUBSTRING ${LIB} 0 ${POS} LIB_NAME)
+      string (SUBSTRING ${LIB} ${POS} -1 LIB_VERSION)
+      string (STRIP ${LIB_NAME} LIB_NAME)
+      string (STRIP ${LIB_VERSION} LIB_VERSION)
+      generic_find (LIBNAME ${LIB_NAME} REQUIRED VERSION "${LIB_VERSION}")
+    endif()
+  else ()
+    string (STRIP ${LIB} LIB_NAME)
+    generic_find (LIBNAME ${LIB_NAME} REQUIRED)
+  endif ()
+  list (APPEND REQUIRED_LIBRARIES ${${LIB_NAME}_LIBRARIES})
+  list (APPEND KMSRIPPLEGREETING_INCLUDE_DIRS ${${LIB_NAME}_INCLUDE_DIRS})
+
+endforeach()
+
+set(KMSRIPPLEGREETING_INCLUDE_DIRS
+  ${KMSRIPPLEGREETING_INCLUDE_DIRS}
+  CACHE INTERNAL "Include directories for KMSRIPPLEGREETING library" FORCE
+)
+
+set (KMSRIPPLEGREETING_LIBRARIES
+  ${KMSRIPPLEGREETING_LIBRARY}
+  ${KMSCORE_LIBRARIES}
+  ${KMSELEMENTS_LIBRARIES}
+  ${KMSFILTERS_LIBRARIES}
+  ${REQUIRED_LIBRARIES}
+  CACHE INTERNAL "Libraries for KMSRIPPLEGREETING" FORCE
+)
+
+include (FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(KMSRIPPLEGREETING
+  FOUND_VAR
+    KMSRIPPLEGREETING_FOUND
+  REQUIRED_VARS
+    ${REQUIRED_VARS}
+  VERSION_VAR
+    KMSRIPPLEGREETING_VERSION
+)
+
+mark_as_advanced(
+  KMSRIPPLEGREETING_FOUND
+  KMSRIPPLEGREETING_VERSION
+  KMSRIPPLEGREETING_INTERFACE_INCLUDE_DIR
+  KMSRIPPLEGREETING_IMPLEMENTATION_INTERNAL_INCLUDE_DIR
+  KMSRIPPLEGREETING_IMPLEMENTATION_GENERATED_INCLUDE_DIR
+  KMSRIPPLEGREETING_IMPLEMENTATION_EXTRA_INCLUDE_DIR
+  KMSRIPPLEGREETING_INTERFACE_EXTRA_INCLUDE_DIR
+  KMSRIPPLEGREETING_INCLUDE_DIRS
+  KMSRIPPLEGREETING_LIBRARY
+  KMSRIPPLEGREETING_LIBRARIES
+)

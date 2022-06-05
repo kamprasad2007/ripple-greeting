@@ -1,0 +1,3 @@
+shlibs:Depends=kms-core, kms-filters, kms-jsonrpc, kmsjsoncpp, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgstreamer1.5-0 (>= 1.8.1), libopencv-core3.2, libopencv-imgproc3.2, libstdc++6 (>= 5.2), ripple-greeting
+misc:Depends=
+misc:Pre-Depends=
